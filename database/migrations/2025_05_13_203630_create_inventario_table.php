@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('categoria_id')->nullable()->index();
             $table->foreign('categoria_id')->references('id')->on('categorias_inventario')->onDelete('cascade');
 
-            $table->uuid('unique_id')->unique();
             $table->string('codigo')->unique();
             $table->string('nombre');
             $table->text('descripcion')->nullable();
@@ -29,6 +28,7 @@ return new class extends Migration
             $table->date('fecha_aquisicion')->nullable();
             $table->string('estado_conservacion')->nullable();
             $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
+            $table->uuid('unique_id')->unique();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->nullable();
             // $table->timestamps();

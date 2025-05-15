@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('empleados_id')->nullable()->index();
             $table->foreign('empleados_id')->references('id')->on('empleados')->onDelete('cascade');
 
-            $table->uuid('unique_id')->unique();
             $table->datetime('entrada')->nullable();
             $table->datetime('salida')->nullable();
             $table->string('tipo_registro')->nullable();
@@ -26,6 +25,7 @@ return new class extends Migration
             $table->text('observacion')->nullable();
 
             $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
+            $table->uuid('unique_id')->unique();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->nullable();
             // $table->timestamps();
