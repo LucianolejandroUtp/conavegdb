@@ -22,9 +22,9 @@ return new class extends Migration
             $table->date('fecha_asignacion')->nullable();
             $table->date('fecha_fin_asignacion')->nullable();
             $table->string('rol')->nullable();
-            $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
-            $table->uuid('unique_id')->unique();
-            $table->timestamp('created_at')->useCurrent();
+            $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO')->nullable();
+            $table->uuid('unique_id')->unique()->default(DB::raw('uuid()'))->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->nullable();
             // $table->timestamps();
         });

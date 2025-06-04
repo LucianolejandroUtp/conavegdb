@@ -20,9 +20,9 @@ return new class extends Migration
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
             $table->string('estado_proyecto')->nullable();
-            $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
-            $table->uuid('unique_id')->unique();
-            $table->timestamp('created_at')->useCurrent();
+            $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO')->nullable();
+            $table->uuid('unique_id')->unique()->default(DB::raw('uuid()'))->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->nullable();
             // $table->timestamps();
         });

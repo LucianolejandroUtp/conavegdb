@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
             
-            $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
-            $table->uuid('unique_id')->unique();
-            $table->timestamp('created_at')->useCurrent();
+            $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO')->nullable();
+            $table->uuid('unique_id')->unique()->default(DB::raw('uuid()'))->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->nullable();
             // $table->timestamps();
         });
