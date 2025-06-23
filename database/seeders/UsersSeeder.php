@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Hash;
 class UsersSeeder extends Seeder
 {
     public function run(): void
-    {
-        for ($i = 1; $i <= 8; $i++) {
+    {        for ($i = 1; $i <= 8; $i++) {
             DB::table('users')->insert([
-                'role_id' => rand(1, 5),
+                'role_id' => rand(1, 4),
                 'user_name' => 'usuario' . $i,
                 'email' => 'usuario' . $i . '@mail.com',
                 'email_verified_at' => now(),

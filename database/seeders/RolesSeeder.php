@@ -9,13 +9,11 @@ use Illuminate\Support\Str;
 class RolesSeeder extends Seeder
 {
     public function run(): void
-    {
-        $roles = [
-            ['nombre' => 'Administrador', 'descripcion' => 'Acceso total al sistema', 'estado' => 'ACTIVO'],
-            ['nombre' => 'Supervisor', 'descripcion' => 'Supervisa procesos y usuarios', 'estado' => 'ACTIVO'],
-            ['nombre' => 'Almacenero', 'descripcion' => 'Gestiona inventario', 'estado' => 'ACTIVO'],
-            ['nombre' => 'Empleado', 'descripcion' => 'Usuario estándar', 'estado' => 'ACTIVO'],
-            ['nombre' => 'Invitado', 'descripcion' => 'Acceso limitado', 'estado' => 'ACTIVO'],
+    {        $roles = [
+            ['nombre' => 'ADMINISTRADOR', 'descripcion' => 'Acceso total al sistema, administra todos los recursos', 'estado' => 'ACTIVO'],
+            ['nombre' => 'GERENTE', 'descripcion' => 'Gestiona proyectos, empleados y recursos del área', 'estado' => 'ACTIVO'],
+            ['nombre' => 'EMPLEADO', 'descripcion' => 'Usuario operativo, acceso limitado a funciones específicas', 'estado' => 'ACTIVO'],
+            ['nombre' => 'USER', 'descripcion' => 'Usuario básico con permisos mínimos de lectura', 'estado' => 'ACTIVO'],
         ];
         foreach ($roles as $rol) {
             DB::table('roles')->insert([
