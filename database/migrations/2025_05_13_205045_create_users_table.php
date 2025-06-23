@@ -29,11 +29,22 @@ return new class extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
 
-        // Schema::create('password_reset_tokens', function (Blueprint $table) {
-        //     $table->string('email')->primary();
-        //     $table->string('token');
-        //     $table->timestamp('created_at')->nullable();
-        // });
+Schema::create('password_reset_tokens', function (Blueprint $table) {
+    $table->id(); // Cambiar de email primary a id auto-increment
+    $table->string('token', 255)->unique(); // Token único
+    $table->unsignedBigInteger('user_id'); // Referencia a users.id
+    $table->timestamp('expiry_date'); // Fecha de expiración
+    $table->timestamp('created_at')->useCurrent();
+    $table->boolean('used')->default(false); // Si ya fue usado
+    
+    // Índices para performance
+    $table->index('token');
+    $table->index('user_id');
+    $table->index('expiry_date');
+    
+    // Foreign key
+    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+});
 
         // Schema::create('sessions', function (Blueprint $table) {
         //     $table->string('id')->primary();
@@ -50,8 +61,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('users');
     }
 };
