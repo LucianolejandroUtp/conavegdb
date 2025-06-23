@@ -19,12 +19,14 @@ return new class extends Migration
     $table->boolean('successful');
     $table->text('user_agent')->nullable();
     $table->string('failure_reason', 500)->nullable();
+    $table->string('attempt_type', 50)->default('LOGIN'); // Nueva columna para tipo de intento
     
     // Índices críticos para rate limiting
     $table->index(['email', 'attempt_time']);
     $table->index(['ip_address', 'attempt_time']);
     $table->index('attempt_time');
     $table->index('successful');
+    $table->index(['attempt_type', 'attempt_time']); // Nuevo índice compuesto para rate limiting específico
         });
     }
 
