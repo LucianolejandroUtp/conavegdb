@@ -24,6 +24,13 @@ return new class extends Migration
             $table->string('metodo_registro')->nullable();
             $table->text('observacion')->nullable();
 
+            // Nuevo campo para estado de asistencia
+            $table->enum('estado_asistencia', ['PUNTUAL', 'TARDE', 'AUSENTE', 'JUSTIFICADO', 'OTRO'])->default('PUNTUAL')->nullable();
+
+            // Nuevos campos para coordenadas GPS
+            $table->decimal('latitud', 10, 7)->nullable();
+            $table->decimal('longitud', 10, 7)->nullable();
+
             $table->enum('estado', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO')->nullable();
             $table->uuid('unique_id')->unique()->default(DB::raw('uuid()'))->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
